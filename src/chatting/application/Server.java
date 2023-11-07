@@ -71,8 +71,28 @@ public class Server extends JFrame implements ActionListener {           //class
 		status.setFont(new Font("SAN_SRRIF", Font.BOLD, 12));    
 		p1.add(status);
 		
+		//different panel for chatting msgs part
+		
+		JPanel a1 = new JPanel();   
+		a1.setBounds(5, 75, 440, 570);
+		add(a1);
+		
+		JTextField text = new JTextField();   //text box for writing msgs
+		text.setBounds(5, 655, 310, 40);
+		add(text);
+		
+		JButton send = new JButton("Send");       //for send button
+		send.setBounds(320, 655, 123, 40);
+		send.setBackground(new Color(7, 94, 84));
+		send.setForeground(Color.WHITE);
+		add(send);
+		
+		
+		
+		
 		setSize(450, 700);                                //size of a frame
 		setLocation(200, 50);                            //frame location
+		setUndecorated(true);                             //for removing the upper part of page
 		getContentPane().setBackground(Color.WHITE);     //frame color
 		
 		
