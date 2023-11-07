@@ -60,6 +60,15 @@ public class Server extends JFrame implements ActionListener {           //class
 		morevert.setBounds(420, 20, 10, 25);
 		p1.add(morevert);
 		
+		JLabel name = new JLabel("Abhinav");    //adding name of the person
+		name.setBounds(110, 15, 100, 18);
+		name.setForeground(Color.white);           //changing txt clr
+		name.setFont(new Font("SAN_SRRIF", Font.BOLD, 18));    //font
+		
+		
+		
+		p1.add(name);
+		
 		setSize(450, 700);                  //size of a frame
 		setLocation(200, 50);                //frame location
 		getContentPane().setBackground(Color.WHITE);     //frame color
