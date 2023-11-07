@@ -1,6 +1,5 @@
 package chatting.application;
 
-
 import javax.swing.*;            //for frame
 import java.awt.*;               //handling features of frame
 import java.awt.event.*;         //for actionlistener
@@ -64,13 +63,16 @@ public class Server extends JFrame implements ActionListener {           //class
 		name.setBounds(110, 15, 100, 18);
 		name.setForeground(Color.white);           //changing txt clr
 		name.setFont(new Font("SAN_SRRIF", Font.BOLD, 18));    //font
-		
-		
-		
 		p1.add(name);
 		
-		setSize(450, 700);                  //size of a frame
-		setLocation(200, 50);                //frame location
+		JLabel status = new JLabel("Active Now");    
+		status.setBounds(110, 35, 100, 18);
+		status.setForeground(Color.white);           
+		status.setFont(new Font("SAN_SRRIF", Font.BOLD, 12));    
+		p1.add(status);
+		
+		setSize(450, 700);                                //size of a frame
+		setLocation(200, 50);                            //frame location
 		getContentPane().setBackground(Color.WHITE);     //frame color
 		
 		
