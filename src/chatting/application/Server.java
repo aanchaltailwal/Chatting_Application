@@ -8,6 +8,8 @@ import java.awt.event.*;         //for actionlistener
 public class Server extends JFrame implements ActionListener {           //class
 	
 	JTextField text;        //declaring this globally so that could be used in func also but not only in constructor
+	JPanel a1;
+	Box vertical = Box.createVerticalBox();   //so sending msgs should be in that box only
 	
 	Server(){                                //constructor
 		
@@ -76,7 +78,7 @@ public class Server extends JFrame implements ActionListener {           //class
 		
 		//different panel for chatting msgs part
 		
-		JPanel a1 = new JPanel();   
+		a1 = new JPanel();   
 		a1.setBounds(5, 75, 440, 570);
 		add(a1);
 		
@@ -102,8 +104,23 @@ public class Server extends JFrame implements ActionListener {           //class
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
-		String out = text.getText();
-		System.out.println(out);
+		String out = text.getText();              //for giving the same text uh are typinf on text box
+		
+		JLabel output = new JLabel(out);          //output could be anything rather than string so label
+		JPanel p2 = new JPanel();                 //cauze you can add panel here but not string 
+		p2.add(output);
+		
+		a1.setLayout(new BorderLayout());
+		JPanel right = new JPanel(new BorderLayout());
+		right.add(p2, BorderLayout.LINE_END); //above panel could be move right side, also msgs will be aligned vertically
+		vertical.add(right);        //and if many msgs they will be aligned vertically one by one
+		vertical.add(Box.createVerticalStrut(15));
+		
+		a1.add(vertical, BorderLayout.PAGE_START);    //final
+		
+		repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
+		invalidate();
+		validate();
 		
 	}
 	public static void main(String[] args) {
