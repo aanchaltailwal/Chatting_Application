@@ -6,6 +6,9 @@ import java.awt.event.*;         //for actionlistener
 
 
 public class Server extends JFrame implements ActionListener {           //class
+	
+	JTextField text;        //declaring this globally so that could be used in func also but not only in constructor
+	
 	Server(){                                //constructor
 		
 		setLayout(null);                     //set components of frame
@@ -77,31 +80,30 @@ public class Server extends JFrame implements ActionListener {           //class
 		a1.setBounds(5, 75, 440, 570);
 		add(a1);
 		
-		JTextField text = new JTextField();   //text box for writing msgs
+		text = new JTextField();   //text box for writing msgs
 		text.setBounds(5, 655, 310, 40);
+		text.setFont(new Font("SAN_SRRIF", Font.PLAIN, 16));
 		add(text);
 		
 		JButton send = new JButton("Send");       //for send button
 		send.setBounds(320, 655, 123, 40);
 		send.setBackground(new Color(7, 94, 84));
 		send.setForeground(Color.WHITE);
+		send.addActionListener(this);             //what to do if click on send button
+		send.setFont(new Font("SAN_SRRIF", Font.PLAIN, 16));
 		add(send);
-		
-		
 		
 		
 		setSize(450, 700);                                //size of a frame
 		setLocation(200, 50);                            //frame location
 		setUndecorated(true);                             //for removing the upper part of page
 		getContentPane().setBackground(Color.WHITE);     //frame color
-		
-		
-		
-		
 		setVisible(true);                    //frame visibility	
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
+		String out = text.getText();
+		System.out.println(out);
 		
 	}
 	public static void main(String[] args) {
