@@ -120,6 +120,8 @@ public class Server extends JFrame implements ActionListener {           //class
 		
 		a1.add(vertical, BorderLayout.PAGE_START);    //msg should be from page start
 		
+		text.setText("");         //for empting the box after sending the msg
+		
 		repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
 		invalidate();
 		validate();
