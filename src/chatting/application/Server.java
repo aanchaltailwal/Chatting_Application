@@ -4,7 +4,8 @@ import javax.swing.*;            //for frame
 import javax.swing.border.*;
 import java.awt.*;               //handling features of frame
 import java.awt.event.*;         //for actionlistener
-
+import java.util.*;              //for calender
+import java.text.*;
 
 public class Server extends JFrame implements ActionListener {           //class
 	
@@ -136,6 +137,12 @@ public class Server extends JFrame implements ActionListener {           //class
 		
 		
 		panel.add(output);
+		
+		Calendar cal = Calendar.getInstance();                  //for time down of msg
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		JLabel time = new JLabel();
+		time.setText(sdf.format(cal.getTime()));
+		panel.add(time);
 		
 		return panel;
 	}
