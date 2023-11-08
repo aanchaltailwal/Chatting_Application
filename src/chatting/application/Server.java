@@ -1,6 +1,7 @@
 package chatting.application;
 
 import javax.swing.*;            //for frame
+import javax.swing.border.*;
 import java.awt.*;               //handling features of frame
 import java.awt.event.*;         //for actionlistener
 
@@ -116,7 +117,7 @@ public class Server extends JFrame implements ActionListener {           //class
 		vertical.add(right);        //and if many msgs they will be aligned vertically one by one
 		vertical.add(Box.createVerticalStrut(15));    //15 is space b/w two msgs
 		
-		a1.add(vertical, BorderLayout.PAGE_START);    //msg sgould be from page start
+		a1.add(vertical, BorderLayout.PAGE_START);    //msg should be from page start
 		
 		repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
 		invalidate();
@@ -128,6 +129,11 @@ public class Server extends JFrame implements ActionListener {           //class
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		JLabel output = new JLabel(out);
+		output.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		output.setBackground(new Color(37, 211, 102));
+		output.setOpaque(true);
+		output.setBorder(new EmptyBorder(15, 15, 15, 50));
+		
 		
 		panel.add(output);
 		
