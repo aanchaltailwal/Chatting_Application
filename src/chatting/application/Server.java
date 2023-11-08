@@ -128,7 +128,7 @@ public class Server extends JFrame implements ActionListener {           //class
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		JLabel output = new JLabel(out);
+		JLabel output = new JLabel("<html><p style=\"width: 150px\">" + out + "</p></html>");
 		output.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		output.setBackground(new Color(37, 211, 102));
 		output.setOpaque(true);
