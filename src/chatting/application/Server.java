@@ -4,8 +4,11 @@ import javax.swing.*;            //for frame
 import javax.swing.border.*;
 import java.awt.*;               //handling features of frame
 import java.awt.event.*;         //for actionlistener
+import java.net.ServerSocket;
 import java.util.*;              //for calender
 import java.text.*;
+import java.net.*;                 //for making it server
+import java.io.*;
 
 public class Server extends JFrame implements ActionListener {           //class
 	
@@ -151,6 +154,22 @@ public class Server extends JFrame implements ActionListener {           //class
 	
 	public static void main(String[] args) {
 		new Server();                         //object
+		
+		try {        //func if server face any issue 
+			ServerSocket skt = new ServerSocket(6001);
+			while(true) {
+				Socket s = skt.accept();            //to accept the msgs
+				DataInputStream din = new DataInputStream(s.getInputStream());
+				DataOutputStream sout = new DataOutputStream(s.getOutputStream);
+				while(true) {
+					String msg = din.readUTF();
+					JPanel panel = formatLabel();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+				
+			}
+		}
 		
 	}
 }
