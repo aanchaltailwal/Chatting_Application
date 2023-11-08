@@ -152,5 +152,6 @@ public class Client extends JFrame implements ActionListener {           //class
 	public static void main(String[] args) {
 		new Client();                         //object
 		
+		
 	}
 }

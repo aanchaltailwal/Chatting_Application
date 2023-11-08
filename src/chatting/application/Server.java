@@ -182,7 +182,7 @@ public class Server implements ActionListener {           //class
 					f.validate();
 				 }
             }
-        } catch (Exception e) {
+        } catch (Exception e) {                    //here we created server
             e.printStackTrace();
         }
     }
