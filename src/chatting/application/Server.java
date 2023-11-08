@@ -106,23 +106,34 @@ public class Server extends JFrame implements ActionListener {           //class
 	public void actionPerformed(ActionEvent ae) {
 		String out = text.getText();              //for giving the same text uh are typinf on text box
 		
-		JLabel output = new JLabel(out);          //output could be anything rather than string so label
-		JPanel p2 = new JPanel();                 //cauze you can add panel here but not string 
-		p2.add(output);
+		
+		JPanel p2 = formatLabel(out);                 //cauze you can add panel here but not string 
+
 		
 		a1.setLayout(new BorderLayout());
 		JPanel right = new JPanel(new BorderLayout());
 		right.add(p2, BorderLayout.LINE_END); //above panel could be move right side, also msgs will be aligned vertically
 		vertical.add(right);        //and if many msgs they will be aligned vertically one by one
-		vertical.add(Box.createVerticalStrut(15));
+		vertical.add(Box.createVerticalStrut(15));    //15 is space b/w two msgs
 		
-		a1.add(vertical, BorderLayout.PAGE_START);    //final
+		a1.add(vertical, BorderLayout.PAGE_START);    //msg sgould be from page start
 		
 		repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
 		invalidate();
 		validate();
 		
 	}
+	public static JPanel formatLabel(String out) {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		JLabel output = new JLabel(out);
+		
+		panel.add(output);
+		
+		return panel;
+	}
+	
 	public static void main(String[] args) {
 		new Server();                         //object
 		
