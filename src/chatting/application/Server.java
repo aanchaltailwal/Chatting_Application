@@ -10,21 +10,23 @@ import java.text.*;
 import java.net.*;                 //for making it server
 import java.io.*;
 
-public class Server extends JFrame implements ActionListener {           //class
+public class Server implements ActionListener {           //class
 	
 	JTextField text;        //declaring this globally so that could be used in func also but not only in constructor
 	JPanel a1;
-	Box vertical = Box.createVerticalBox();   //so sending msgs should be in that box only
-	
+	static Box vertical = Box.createVerticalBox();   //so sending msgs should be in that box only
+	static JFrame f = new JFrame();                //doing it static
+	static DataOutputStream dout;
+	 
 	Server(){                                //constructor
 		
-		setLayout(null);                     //set components of frame
+		f.setLayout(null);                     //set components of frame
 		
 		JPanel p1 = new JPanel(); //for things above frame
 		p1.setBackground(new Color(7, 94, 84));
 		p1.setBounds(0, 0, 450, 70);
 		p1.setLayout(null);
-		add(p1);
+		f.add(p1);
 		
 		
 		ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/3.png"));  //for image
@@ -85,12 +87,12 @@ public class Server extends JFrame implements ActionListener {           //class
 		
 		a1 = new JPanel();   
 		a1.setBounds(5, 75, 440, 570);
-		add(a1);
+		f.add(a1);
 		
 		text = new JTextField();   //text box for writing msgs
 		text.setBounds(5, 655, 310, 40);
 		text.setFont(new Font("SAN_SRRIF", Font.PLAIN, 16));
-		add(text);
+		f.add(text);
 		
 		JButton send = new JButton("Send");       //for send button
 		send.setBounds(320, 655, 123, 40);
@@ -98,36 +100,43 @@ public class Server extends JFrame implements ActionListener {           //class
 		send.setForeground(Color.WHITE);
 		send.addActionListener(this);             //what to do if click on send button
 		send.setFont(new Font("SAN_SRRIF", Font.PLAIN, 16));
-		add(send);
+		f.add(send);
 		
 		
-		setSize(450, 700);                                //size of a frame
-		setLocation(200, 50);                            //frame location
-		setUndecorated(true);                             //for removing the upper part of page
-		getContentPane().setBackground(Color.WHITE);     //frame color
-		setVisible(true);                    //frame visibility	
+		f.setSize(450, 700);                                //size of a frame
+		f.setLocation(200, 50);                            //frame location
+		f.setUndecorated(true);                             //for removing the upper part of page
+		f.getContentPane().setBackground(Color.WHITE);     //frame color
+		f.setVisible(true);                    //frame visibility	
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
-		String out = text.getText();              //for giving the same text uh are typinf on text box
-		
-		
-		JPanel p2 = formatLabel(out);                 //cauze you can add panel here but not string 
+		try {
+			String out = text.getText();              //for giving the same text uh are typinf on text box
+			
+			
+			JPanel p2 = formatLabel(out);                 //cauze you can add panel here but not string 
 
+			
+			a1.setLayout(new BorderLayout());
+			JPanel right = new JPanel(new BorderLayout());
+			right.add(p2, BorderLayout.LINE_END); //above panel could be move right side, also msgs will be aligned vertically
+			vertical.add(right);        //and if many msgs they will be aligned vertically one by one
+			vertical.add(Box.createVerticalStrut(15));    //15 is space b/w two msgs
+			
+			a1.add(vertical, BorderLayout.PAGE_START);    //msg should be from page start
+			dout.writeUTF(out);
+			
+			text.setText("");         //for empting the box after sending the msg
+			
+			f.repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
+			f.invalidate();
+			f.validate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		a1.setLayout(new BorderLayout());
-		JPanel right = new JPanel(new BorderLayout());
-		right.add(p2, BorderLayout.LINE_END); //above panel could be move right side, also msgs will be aligned vertically
-		vertical.add(right);        //and if many msgs they will be aligned vertically one by one
-		vertical.add(Box.createVerticalStrut(15));    //15 is space b/w two msgs
-		
-		a1.add(vertical, BorderLayout.PAGE_START);    //msg should be from page start
-		
-		text.setText("");         //for empting the box after sending the msg
-		
-		repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
-		invalidate();
-		validate();
 		
 	}
 	public static JPanel formatLabel(String out) {
@@ -160,16 +169,26 @@ public class Server extends JFrame implements ActionListener {           //class
 			while(true) {
 				Socket s = skt.accept();            //to accept the msgs
 				DataInputStream din = new DataInputStream(s.getInputStream());
-				DataOutputStream sout = new DataOutputStream(s.getOutputStream);
+				dout = new DataOutputStream(s.getOutputStream());
+				
+				
 				while(true) {
 					String msg = din.readUTF();
-					JPanel panel = formatLabel();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-				
-			}
-		}
-		
-	}
+					JPanel panel = formatLabel(msg);
+					
+					JPanel left = new JPanel(new BorderLayout());   //recieved msgs in left
+					left.add(panel, BorderLayout.LINE_START);
+					vertical.add(left);
+					f.validate();
+				 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+					
+					
+					
+					
+		
