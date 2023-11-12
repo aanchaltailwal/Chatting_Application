@@ -6,12 +6,16 @@ import java.awt.*;               //handling features of frame
 import java.awt.event.*;         //for actionlistener
 import java.util.*;              //for calender
 import java.text.*;
+import java.net.*;                 
+import java.io.*;
 
 public class Client extends JFrame implements ActionListener {           //class
 	
 	JTextField text;        //declaring this globally so that could be used in func also but not only in constructor
 	JPanel a1;
 	Box vertical = Box.createVerticalBox();   //so sending msgs should be in that box only
+	
+	static DataOutputStream dout;
 	
 	Client(){                                //constructor
 		
@@ -66,7 +70,7 @@ public class Client extends JFrame implements ActionListener {           //class
 		morevert.setBounds(420, 20, 10, 25);
 		p1.add(morevert);
 		
-		JLabel name = new JLabel("Aanchal");    //adding name of the person
+		JLabel name = new JLabel("Synthia");    //adding name of the person
 		name.setBounds(110, 15, 100, 18);
 		name.setForeground(Color.white);           //changing txt clr
 		name.setFont(new Font("SAN_SRRIF", Font.BOLD, 18));    //font
@@ -152,6 +156,13 @@ public class Client extends JFrame implements ActionListener {           //class
 	public static void main(String[] args) {
 		new Client();                         //object
 		
+		try {
+			Socket s = new Socket("127.0.0.1", 6001);  //ip of server and it's port
+			DataInputStream din = new DataInputStream(s.getInputStream());
+			dout = new DataOutputStream(s.getOutputStream());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 }
