@@ -9,11 +9,13 @@ import java.text.*;
 import java.net.*;                 
 import java.io.*;
 
-public class Client extends JFrame implements ActionListener {           //class
+public class Client implements ActionListener {           //class
 	
 	JTextField text;        //declaring this globally so that could be used in func also but not only in constructor
-	JPanel a1;
-	Box vertical = Box.createVerticalBox();   //so sending msgs should be in that box only
+	static JPanel a1;
+	static Box vertical = Box.createVerticalBox();   //so sending msgs should be in that box only
+	
+	static JFrame f = new JFrame();
 	
 	static DataOutputStream dout;
 	
@@ -160,6 +162,21 @@ public class Client extends JFrame implements ActionListener {           //class
 			Socket s = new Socket("127.0.0.1", 6001);  //ip of server and it's port
 			DataInputStream din = new DataInputStream(s.getInputStream());
 			dout = new DataOutputStream(s.getOutputStream());
+			
+			while(true) {
+				a1.setLayout(new_BorderLayout());
+				String msg = din.readUTF();
+				JPanel panel = formatLabel(msg);
+				
+				JPanel left = new JPanel(new BorderLayout());   //recieved msgs in left
+				left.add(panel, BorderLayout.LINE_START);
+				vertical.add(left);
+				
+				vertical.add(Box.createVerticalStrut(15));
+				a1.add(vertical, BorderLayout.PAGE_START);
+				f.validate();
+			}
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
