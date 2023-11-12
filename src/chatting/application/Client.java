@@ -21,13 +21,13 @@ public class Client implements ActionListener {           //class
 	
 	Client(){                                //constructor
 		
-		setLayout(null);                     //set components of frame
+		f.setLayout(null);                     //set components of frame
 		
 		JPanel p1 = new JPanel(); //for things above frame
 		p1.setBackground(new Color(7, 94, 84));
 		p1.setBounds(0, 0, 450, 70);
 		p1.setLayout(null);
-		add(p1);
+		f.add(p1);
 		
 		
 		ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/3.png"));  //for image
@@ -88,12 +88,12 @@ public class Client implements ActionListener {           //class
 		
 		a1 = new JPanel();   
 		a1.setBounds(5, 75, 440, 570);
-		add(a1);
+		f.add(a1);
 		
 		text = new JTextField();   //text box for writing msgs
 		text.setBounds(5, 655, 310, 40);
 		text.setFont(new Font("SAN_SRRIF", Font.PLAIN, 16));
-		add(text);
+		f.add(text);
 		
 		JButton send = new JButton("Send");       //for send button
 		send.setBounds(320, 655, 123, 40);
@@ -101,14 +101,14 @@ public class Client implements ActionListener {           //class
 		send.setForeground(Color.WHITE);
 		send.addActionListener(this);             //what to do if click on send button
 		send.setFont(new Font("SAN_SRRIF", Font.PLAIN, 16));
-		add(send);
+		f.add(send);
 		
 		
-		setSize(450, 700);                                //size of a frame
-		setLocation(800, 50);                            //frame location
-		setUndecorated(true);                             //for removing the upper part of page
-		getContentPane().setBackground(Color.WHITE);     //frame color
-		setVisible(true);                    //frame visibility	
+		f.setSize(450, 700);                                //size of a frame
+		f.setLocation(800, 50);                            //frame location
+		f.setUndecorated(true);                             //for removing the upper part of page
+		f.getContentPane().setBackground(Color.WHITE);     //frame color
+		f.setVisible(true);                    //frame visibility	
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
@@ -128,9 +128,9 @@ public class Client implements ActionListener {           //class
 		
 		text.setText("");         //for empting the box after sending the msg
 		
-		repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
-		invalidate();
-		validate();
+		f.repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
+		f.invalidate();
+		f.validate();
 		
 	}
 	public static JPanel formatLabel(String out) {
