@@ -112,26 +112,32 @@ public class Client implements ActionListener {           //class
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
-		String out = text.getText();              //for giving the same text uh are typinf on text box
 		
-		
-		JPanel p2 = formatLabel(out);                 //cauze you can add panel here but not string 
-
-		
-		a1.setLayout(new BorderLayout());
-		JPanel right = new JPanel(new BorderLayout());
-		right.add(p2, BorderLayout.LINE_END); //above panel could be move right side, also msgs will be aligned vertically
-		vertical.add(right);        //and if many msgs they will be aligned vertically one by one
-		vertical.add(Box.createVerticalStrut(15));    //15 is space b/w two msgs
-		
-		a1.add(vertical, BorderLayout.PAGE_START);    //msg should be from page start
-		
-		text.setText("");         //for empting the box after sending the msg
-		
-		f.repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
-		f.invalidate();
-		f.validate();
-		
+		try {
+			String out = text.getText();              //for giving the same text uh are typinf on text box
+			
+			
+			JPanel p2 = formatLabel(out);                 //cauze you can add panel here but not string 
+	
+			
+			a1.setLayout(new BorderLayout());
+			JPanel right = new JPanel(new BorderLayout());
+			right.add(p2, BorderLayout.LINE_END); //above panel could be move right side, also msgs will be aligned vertically
+			vertical.add(right);        //and if many msgs they will be aligned vertically one by one
+			vertical.add(Box.createVerticalStrut(15));    //15 is space b/w two msgs
+			
+			a1.add(vertical, BorderLayout.PAGE_START);    //msg should be from page start
+			
+			dout.writeUTF(out);     //send msg to server
+			
+			text.setText("");         //for empting the box after sending the msg
+			
+			f.repaint();    //we'll have to repaint the obj so that we can see the reloaded text we are typing
+			f.invalidate();
+			f.validate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public static JPanel formatLabel(String out) {
 		JPanel panel = new JPanel();
@@ -164,7 +170,7 @@ public class Client implements ActionListener {           //class
 			dout = new DataOutputStream(s.getOutputStream());
 			
 			while(true) {
-				a1.setLayout(new_BorderLayout());
+				a1.setLayout(new BorderLayout());
 				String msg = din.readUTF();
 				JPanel panel = formatLabel(msg);
 				

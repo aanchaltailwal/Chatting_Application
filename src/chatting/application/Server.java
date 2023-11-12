@@ -171,7 +171,7 @@ public class Server implements ActionListener {           //class
 				DataInputStream din = new DataInputStream(s.getInputStream());
 				dout = new DataOutputStream(s.getOutputStream());
 				
-				
+				//to transfer msgs server should be run first
 				while(true) {
 					String msg = din.readUTF();
 					JPanel panel = formatLabel(msg);
