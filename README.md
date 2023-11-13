@@ -24,4 +24,4 @@ and a server named Synthia and Alex.
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/chatting-application.git
+   https://github.com/aanchaltailwal/Chatting_Application
